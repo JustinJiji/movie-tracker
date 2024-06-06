@@ -1,0 +1,256 @@
+/* .login-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  position: sticky;
+  top: 15%;
+  left: 35%;
+  color: white;
+  padding: 0px 40px 40px 40px;
+  text-align: center;
+  animation: fadeIn 0.5s;
+  z-index: 2; 
+  transition: height 0.3s ease; 
+
+.login-container h1 {
+  margin-bottom: 30px; 
+  font-size: 32px; 
+  font-weight: bold; 
+  color: #ffffff; 
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registerline > h3 {
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.login-container h3:nth-of-type(2) {
+  font-size: 16px;
+  font-weight: lighter;
+  color: green;
+} */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+@keyframes changeBackground {
+  0%,
+  100% {
+    opacity: 1;
+    background-image: url("../../assets/images/interstellar.jpg"),
+      linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.9)
+      );
+  }
+  25% {
+    opacity: 1;
+    background-image: url("../../assets/images/spiderman.jpeg"),
+      linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.9)
+      );
+  }
+  50% {
+    opacity: 1;
+    background-image: url("../../assets/images/johnwick.jpeg"),
+      linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.9)
+      );
+  }
+  75% {
+    opacity: 1;
+    background-image: url("../../assets/images/dune.webp"),
+      linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.9)
+      );
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bg-container {
+  animation: changeBackground 40s infinite;
+  transition: opacity 2s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  background-blend-mode: multiply;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.bg-container.darken {
+  position: relative;
+}
+
+.bg-container.darken::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
+  z-index: 1;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding: 10px 20px;
+  z-index: 2; /* Ensure navbar is above darken effect */
+}
+
+.button {
+  color: #ffffff;
+  font-size: 16px;
+  background-color: green; /* Button color */
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Padding inside the button */
+  cursor: pointer; /* Cursor pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.button:hover {
+  background-color: rgb(7, 145, 7);
+}
+
+.name {
+  color: #ffffff; /* Text color */
+  font-size: 24px; /* Font size */
+  font-weight: bold; /* Bold font weight */
+  z-index: 2; /* Ensure text is above darken effect */
+}
+
+.tagline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 75%;
+  color: white;
+  align-items: center;
+  justify-content: end;
+  font-size: 40px;
+  font-weight: 600;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  z-index: 2; /* Ensure tagline is above darken effect */
+}
+
+.button {
+  color: #ffffff;
+  font-size: 16px;
+  background-color: green; /* Button color */
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Padding inside the button */
+  cursor: pointer; /* Cursor pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.button:hover {
+  background-color: rgb(7, 145, 7);
+}
+
+.login-container h1 {
+  margin-bottom: 30px; 
+  font-size: 32px; 
+  font-weight: bold; 
+  color: #ffffff; 
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container h3:nth-of-type(2) {
+  font-size: 16px;
+  font-weight: lighter;
+  color: green;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  align-items: center; /* Ensure vertical centering */
+}
+
+.tab-button {
+  width: 50%;
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  transition: border-bottom 0.3s ease; /* Add transition for smooth animation */
+}
+
+.tab-button.active {
+  border-bottom: 3px solid green;
+}
+
+.tab-separator {
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  margin: 0 20px; /* Adjust spacing between the tabs */
+}
+
+/* Adjust the position and animation for the login-container */
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  position: sticky;
+  top: 15%;
+  left: 35%;
+  color: white;
+  padding: 0px 40px 40px 40px;
+  text-align: center;
+  animation: fadeIn 0.5s;
+  z-index: 2; /* Ensure login box is above darken effect */
+  transition: height 0.3s ease; /* Add transition for smooth height change */
+}
+
+/* Optional: Add hover effect for the tab buttons */
+.tab-button:hover {
+  color: green;
+}

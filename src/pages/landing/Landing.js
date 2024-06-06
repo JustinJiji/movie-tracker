@@ -11,6 +11,10 @@ function Landing() {
     setShowLogin(true);
   };
 
+  const handleRegisterClick = () => {
+    setActiveTab("register");
+  };
+
   return (
     <div>
       <div className={`bg-container ${showLogin ? "darken" : ""}`}>
@@ -56,7 +60,11 @@ function Landing() {
                 Register
               </h1>
             </div>
-            {activeTab === "login" ? <LoginBox /> : <RegisterBox />}
+            {activeTab === "login" ? (
+              <LoginBox onRegisterClick={handleRegisterClick} />
+            ) : (
+              <RegisterBox />
+            )}
           </div>
         )}
       </div>

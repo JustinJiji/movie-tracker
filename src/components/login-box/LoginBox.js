@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./LoginBox.css";
 
-function LoginBox() {
+function LoginBox({ onRegisterClick }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <>
       <form>
@@ -29,11 +30,12 @@ function LoginBox() {
           Login
         </button>
       </form>
-      <div className="registerline">
+      <div className="registerline" onClick={onRegisterClick}>
         <h3>Don't have an account? </h3>
         <h3>Register</h3>
       </div>
     </>
   );
 }
+
 export default LoginBox;

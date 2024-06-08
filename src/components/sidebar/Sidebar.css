@@ -1,0 +1,119 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 85px;
+  height: 100%;
+  background-color: transparent;
+  transition: width 0.6s ease;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.sidebar:hover {
+  width: 250px;
+}
+
+.logo {
+  padding: 15px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.menu {
+  background-color: #1f2223;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.menu-main-options {
+  padding: 20px 0 20px 30px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.menu-main-options li {
+  padding: 25px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white; /* Set the initial color to match icons */
+}
+
+.menu-main-options li:hover,
+.menu-main-options li.hover {
+  color: #f7a835; 
+}
+
+.menu-main-options li.active {
+  color: #f7a835; 
+}
+
+.menu-main-options li span {
+  color: transparent; 
+  font-size: 20px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.sidebar:hover .menu-main-options li span {
+  color: inherit; 
+  padding-left: 15px;
+  transition: all 0.4s ease;
+}
+
+.logo span {
+  padding-left: 10px;
+  position: absolute;
+  color: transparent;
+  transition: all 0.4s ease;
+}
+
+.sidebar:hover .logo span:first-child {
+  color: #d75015;
+}
+
+.sidebar .logo span:last-child {
+  color: #d75015;
+}
+
+.sidebar:hover .logo span:last-child {
+  color: transparent;
+}
+
+.logout {
+  padding-left: 30px;
+  list-style: none;
+}
+
+.logout:hover {
+    color: #f7a835;
+}
+
+.logout li {
+  padding: 25px 0 10px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logout li span {
+  color: transparent;
+  font-size: 20px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.sidebar:hover .logout li span {
+  color: white;
+  padding-left: 15px;
+  transition: all 0.4s ease;
+}
+
+.sidebar:hover .logout:hover li span {
+    color: #f7a835;
+}

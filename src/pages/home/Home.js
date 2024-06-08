@@ -1,13 +1,11 @@
 import React from "react";
 import "./Home.css";
-import Dashboard from "../../components/dashboard/Dashboard";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 const Home = () => {
   return (
     <div className="home">
-      <div className="sidebar">
-        <Dashboard />
-      </div>
+      <Sidebar />
       <div className="main-content">
         {/* Profile section or other content */}
         <div className="profile-section">

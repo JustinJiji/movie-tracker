@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHeart,
   faNewspaper,
   faBookmark,
   faHome,
   faPowerOff,
+  faEye,
+
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-function Main() {
+function Sidebar({onSelecting}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
+    onSelecting(index);
   };
 
   const handleItemHover = (index) => {
@@ -25,13 +27,13 @@ function Main() {
   const navigate = useNavigate();
   const menuItems = [
     { icon: faHome, label: "Home" },
-    { icon: faHeart, label: "Watched List" },
+    { icon: faEye, label: "Watched" },
     { icon: faBookmark, label: "Watchlist" },
     { icon: faNewspaper, label: "Upcoming" },
   ];
 
   return (
-    <div className="home">
+    <div >
       <aside className="sidebar">
         <nav className="menu">
           <div className="logo">
@@ -68,4 +70,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Sidebar;

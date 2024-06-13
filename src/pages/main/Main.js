@@ -8,6 +8,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 
 const Main = () => {
   const [selectedContent, setSelectedContent] = useState(0);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
   const renderContent = () => {
     switch (selectedContent) {
       case 0:
@@ -25,8 +26,11 @@ const Main = () => {
 
   return (
     <div className="main">
-      <Sidebar onSelecting={setSelectedContent} />
-      <div className="main-content">{renderContent()}</div>
+      <Sidebar
+        onSelecting={setSelectedContent}
+        onSidebarHover={setIsSidebarHovered}
+      />
+      <div className={`main-content ${isSidebarHovered ? "hovered":""}`}>{renderContent()}</div>
     </div>
   );
 };

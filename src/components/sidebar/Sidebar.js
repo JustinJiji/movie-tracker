@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar({onSelecting}) {
+function Sidebar({ onSelecting, onSidebarHover }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState(null);
 
@@ -33,8 +33,12 @@ function Sidebar({onSelecting}) {
   ];
 
   return (
-    <div >
-      <aside className="sidebar">
+    <div>
+      <aside
+        className="sidebar"
+        onMouseEnter={() => onSidebarHover(true)}
+        onMouseLeave={() => onSidebarHover(false)}
+      >
         <nav className="menu">
           <div className="logo">
             <span>MovieTracker</span>
@@ -57,9 +61,7 @@ function Sidebar({onSelecting}) {
             ))}
           </ul>
           <ul className="logout">
-            <li onClick={
-              () => navigate('/')
-            }>
+            <li onClick={() => navigate("/")}>
               <FontAwesomeIcon icon={faPowerOff} fontSize={23} />
               <span>Logout</span>
             </li>

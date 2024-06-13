@@ -5,14 +5,15 @@
 }
 
 .main-content {
+  display: flex;
   flex: 1;
   margin-left: 85px;
-  padding: 20px;
   height: 100%;
   background-color: #252425;
   transition: margin-left 0.6s ease;
+  overflow: auto;
 }
 
-
-
-
+.hovered {
+  margin-left: 250px;
+}

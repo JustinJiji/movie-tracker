@@ -23,7 +23,7 @@
 }
 
 .menu {
-  background:linear-gradient(to right, rgb(0, 4, 2, 1) 60%, rgba(37, 36, 37, 0.5) 100%);
+  background-color: #000402;
   color: white;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,24 @@
+import React from "react";
+import Card from "../../components/others/Card";
+import "./Watched.css";
+
 function Watched() {
   return (
-    <div>Watched</div>
-  )
+    <div className="watched">
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+    </div>
+  );
 }
-export default Watched
+export default Watched;

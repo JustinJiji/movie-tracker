@@ -1,0 +1,59 @@
+.card {
+  position: relative;
+  background-color: rgba(0, 4, 2, 0.8);
+  width: 100px;
+  height: 150px;
+  padding: 20px;
+  margin: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgb(75, 75, 75);
+}
+
+ .card h2 {
+  color: #d8e2ac;
+}
+
+
+/*Search Bar*/
+
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+}
+
+.search-bar:hover {
+  width: 350px; 
+}
+/* .search-bar input[type="text"]:focus{
+  width: 350px;
+} */
+.search-bar input[type="text"] {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.search-bar button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.search-bar button:focus {
+  outline: none;
+}
+
+.search-bar button:hover {
+  color: #555;
+}

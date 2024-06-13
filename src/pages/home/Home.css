@@ -1,0 +1,16 @@
+.home {
+    width: 100%;
+    overflow: auto;
+    padding: 20px;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+}
+
+.home-content-container {
+    margin-top: 50px;
+    overflow: hidden;
+}

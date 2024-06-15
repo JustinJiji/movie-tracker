@@ -1,7 +1,19 @@
 const {
+  fetchTrendingBoth,
   fetchTrendingMovies,
   fetchTrendingSeries,
 } = require("../services/trendingService");
+
+const getTrendingBoth = async (req, res) => {
+  try {
+    const msboth = await fetchTrendingBoth();
+    res.json(msboth);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to fetch trending movies and series" });
+  }
+};
 
 const getTrendingMovies = async (req, res) => {
   try {
@@ -21,4 +33,4 @@ const getTrendingSeries = async (req, res) => {
   }
 };
 
-module.exports = { getTrendingMovies, getTrendingSeries };
+module.exports = { getTrendingBoth, getTrendingMovies, getTrendingSeries };

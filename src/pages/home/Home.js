@@ -3,6 +3,8 @@ import Card from "../../components/others/Card";
 import SearchBar from "../../components/others/SearchBar";
 import "./Home.css";
 import {
+  getPopularMovies,
+  getPopularSeries,
   getTrendingBoth,
   getTrendingMovies,
   getTrendingSeries,
@@ -10,8 +12,10 @@ import {
 import config from "../../config";
 
 function Home() {
-  const [movies, setMovies] = useState([]);
-  const [series, setSeries] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [trendingSeries, setTrendingSeries] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [popularSeries, setPopularSeries] = useState([]);
   const [msboth, setMsboth] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [activeButtonTrending, setActiveButtonTrending] = useState("Movie");
@@ -34,10 +38,14 @@ function Home() {
       try {
         const msboth = await getTrendingBoth();
         setMsboth(msboth);
-        const movies = await getTrendingMovies();
-        setMovies(movies);
-        const series = await getTrendingSeries();
-        setSeries(series);
+        const trendingMovies = await getTrendingMovies();
+        setTrendingMovies(trendingMovies);
+        const trendingSeries = await getTrendingSeries();
+        setTrendingSeries(trendingSeries);
+        const popularMovies = await getPopularMovies();
+        setPopularMovies(popularMovies);
+        const popularSeries = await getPopularSeries();
+        setPopularSeries(popularSeries);
       } catch (error) {
         console.error("Failed to fetch trending data", error);
       }
@@ -115,16 +123,18 @@ function Home() {
           </div>
           <div className="home-cards-list">
             {activeButtonTrending === "Movie"
-              ? movies.map((movie) => (
+              ? trendingMovies.map((trendingMovie) => (
                   <Card
-                    key={movie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${movie.poster_path}`}
+                    key={trendingMovie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${trendingMovie.poster_path}`}
+                    title={trendingMovie.title || trendingMovie.name}
                   />
                 ))
-              : series.map((serie) => (
+              : trendingSeries.map((trendingSerie) => (
                   <Card
-                    key={serie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${serie.poster_path}`}
+                    key={trendingSerie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${trendingSerie.poster_path}`}
+                    title={trendingSerie.title || trendingSerie.name}
                   />
                 ))}
           </div>
@@ -153,16 +163,18 @@ function Home() {
           </div>
           <div className="home-cards-list">
             {activeButtonPopular === "Movie"
-              ? movies.map((movie) => (
+              ? popularMovies.map((popularMovie) => (
                   <Card
-                    key={movie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${movie.poster_path}`}
+                    key={popularMovie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${popularMovie.poster_path}`}
+                    title={popularMovie.title || popularMovie.name}
                   />
                 ))
-              : series.map((serie) => (
+              : popularSeries.map((popularSerie) => (
                   <Card
-                    key={serie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${serie.poster_path}`}
+                    key={popularSerie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${popularSerie.poster_path}`}
+                    title={popularSerie.title || popularSerie.name}
                   />
                 ))}
           </div>

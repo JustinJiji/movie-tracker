@@ -1,4 +1,4 @@
-.card {
+.card-image-container {
   position: relative;
   width: 100px;
   height: 150px;
@@ -11,8 +11,18 @@
   box-shadow: 0 0 4px rgb(75, 75, 75);
 }
 
-.card h2 {
+.card {
+  display: flex;
+  flex-direction: column;
   color: #d8e2ac;
+  text-align: center;
+  font-size: large;
+}
+
+.card .text {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 14px;
 }
 
 /*Search Bar*/

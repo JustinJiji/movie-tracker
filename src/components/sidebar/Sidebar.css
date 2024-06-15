@@ -48,11 +48,11 @@
 
 .menu-main-options li:hover,
 .menu-main-options li.hover {
-  color: #19a38a; 
+  color: var(--highlight-color);
 }
 
 .menu-main-options li.active {
-  color: #19a38a; 
+  color: var(--highlight-color);
 }
 
 .menu-main-options li span {
@@ -63,7 +63,7 @@
 }
 
 .sidebar:hover .menu-main-options li span {
-  color: inherit; 
+  color: inherit;
   padding-left: 15px;
   transition: all 0.4s ease;
   opacity: 1;
@@ -97,7 +97,7 @@
 }
 
 .logout:hover {
-    color: #19a38a;
+  color: var(--highlight-color);
 }
 
 .logout li {
@@ -123,5 +123,5 @@
 }
 
 .sidebar:hover .logout:hover li span {
-    color: #19a38a;
+  color: var(--highlight-color);
 }

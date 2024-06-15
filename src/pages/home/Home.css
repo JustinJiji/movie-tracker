@@ -44,6 +44,7 @@
   font-weight: 900;
   font-size: 50px;
   line-height: 0.85;
+  margin-bottom: 20px;
 }
 
 .header-para {
@@ -96,16 +97,50 @@
 }
 
 .home-cards-title {
+  display: flex;
   color: white;
   font-size: 30px;
   font-weight: 700;
   width: 100%;
   padding-left: 25px;
+  gap: 20px;
+}
+
+.home-cards-toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.home-cards-toggle-button {
+  font-size: 20px;
+  font-weight: 600;
+  flex: 1;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.home-cards-toggle-button.active {
+  border: 1px solid var(--highlight-color);
+  border-radius: 40px;
+  color: var(--highlight-color);
+  transition: border 0.3s ease, color 0.3s ease;
+}
+
+.home-cards-toggle-button:hover {
+  color: var(--highlight-color);
 }
 
 .home-cards-list {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.home-cards-list::-webkit-scrollbar {
+  display: none;
 }

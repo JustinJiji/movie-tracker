@@ -1,18 +1,19 @@
 .card {
   position: relative;
-  background-color: rgba(0, 4, 2, 0.8);
   width: 100px;
   height: 150px;
+  flex: 0 0 auto; 
   padding: 20px;
-  margin: 25px;
+  margin: 10px;
   border-radius: 8px;
+  background-size: cover;
+  background-position: center;
   box-shadow: 0 0 4px rgb(75, 75, 75);
 }
 
- .card h2 {
+.card h2 {
   color: #d8e2ac;
 }
-
 
 /*Search Bar*/
 

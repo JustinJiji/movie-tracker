@@ -2,26 +2,42 @@ import React, { useState, useEffect, useCallback } from "react";
 import Card from "../../components/others/Card";
 import SearchBar from "../../components/others/SearchBar";
 import "./Home.css";
-import { getTrendingMovies, getTrendingSeries } from "../../api/Api";
+import {
+  getTrendingBoth,
+  getTrendingMovies,
+  getTrendingSeries,
+} from "../../api/Api";
+import config from "../../config";
 
 function Home() {
   const [movies, setMovies] = useState([]);
+  const [series, setSeries] = useState([]);
+  const [msboth, setMsboth] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const imageBaseUrl =
-    "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2";
+  const [activeButtonTrending, setActiveButtonTrending] = useState("Movie");
+  const [activeButtonPopular, setActiveButtonPopular] = useState("Movie");
+
+  const handleToggleTrending = (button) => {
+    setActiveButtonTrending(button);
+  };
+
+  const handleTogglePopular = (button) => {
+    setActiveButtonPopular(button);
+  };
 
   const nextSlide = useCallback(() => {
-    setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % movies.length);
-  }, [movies.length]);
+    setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % msboth.length);
+  }, [msboth.length]);
 
   useEffect(() => {
     const fetchTrendingData = async () => {
       try {
+        const msboth = await getTrendingBoth();
+        setMsboth(msboth);
         const movies = await getTrendingMovies();
-        // const series = await getTrendingSeries(); // Uncomment if you plan to use it later
-        console.log("Fetched movies:", movies);
         setMovies(movies);
-        // setSeries(series); // Uncomment if you plan to use it later
+        const series = await getTrendingSeries();
+        setSeries(series);
       } catch (error) {
         console.error("Failed to fetch trending data", error);
       }
@@ -37,29 +53,33 @@ function Home() {
     return () => clearInterval(interval);
   }, [nextSlide]);
 
-  if (movies.length === 0) {
+  if (msboth.length === 0) {
     console.log("Loading state");
     return <div>Loading...</div>; // Loading state
   }
 
-  const currentSlide = movies[currentSlideIndex];
+  const currentSlide = msboth[currentSlideIndex];
 
   return (
     <div className="home">
       <div
         className="header-image"
-        style={{ backgroundImage: `url(${imageBaseUrl}${currentSlide.backdrop_path})` }}
+        style={{
+          backgroundImage: `url(${config.backdropImgBaseUrl}${currentSlide.backdrop_path})`,
+        }}
       >
         <div className="header-home-overlay">
           <div className="search-container">
             <SearchBar />
           </div>
           <div className="header-texts">
-            <div className="header-title">{currentSlide.title}</div>
+            <div className="header-title">
+              {currentSlide.title || currentSlide.name}
+            </div>
             <div className="header-para">{currentSlide.overview}</div>
           </div>
           <div className="slide-indicators">
-            {movies.map((slide, index) => (
+            {msboth.map((slide, index) => (
               <span
                 key={index}
                 className={index === currentSlideIndex ? "active" : ""}
@@ -72,19 +92,79 @@ function Home() {
 
       <div className="home-content-container">
         <div className="home-cards-container">
-          <div className="home-cards-title">Trending</div>
+          <div className="home-cards-title">
+            Trending
+            <div className="home-cards-toggle-container">
+              <div
+                className={`home-cards-toggle-button ${
+                  activeButtonTrending === "Movie" ? "active" : ""
+                }`}
+                onClick={() => handleToggleTrending("Movie")}
+              >
+                Movie
+              </div>
+              <div
+                className={`home-cards-toggle-button ${
+                  activeButtonTrending === "Series" ? "active" : ""
+                }`}
+                onClick={() => handleToggleTrending("Series")}
+              >
+                Series
+              </div>
+            </div>
+          </div>
           <div className="home-cards-list">
-            {Array.from({ length: 13 }).map((_, index) => (
-              <Card key={index} />
-            ))}
+            {activeButtonTrending === "Movie"
+              ? movies.map((movie) => (
+                  <Card
+                    key={movie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${movie.poster_path}`}
+                  />
+                ))
+              : series.map((serie) => (
+                  <Card
+                    key={serie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${serie.poster_path}`}
+                  />
+                ))}
           </div>
         </div>
         <div className="home-cards-container">
-          <div className="home-cards-title">Popular</div>
+          <div className="home-cards-title">
+            Popular
+            <div className="home-cards-toggle-container">
+              <div
+                className={`home-cards-toggle-button ${
+                  activeButtonPopular === "Movie" ? "active" : ""
+                }`}
+                onClick={() => handleTogglePopular("Movie")}
+              >
+                Movie
+              </div>
+              <div
+                className={`home-cards-toggle-button ${
+                  activeButtonPopular === "Series" ? "active" : ""
+                }`}
+                onClick={() => handleTogglePopular("Series")}
+              >
+                Series
+              </div>
+            </div>
+          </div>
           <div className="home-cards-list">
-            {Array.from({ length: 13 }).map((_, index) => (
-              <Card key={index} />
-            ))}
+            {activeButtonPopular === "Movie"
+              ? movies.map((movie) => (
+                  <Card
+                    key={movie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${movie.poster_path}`}
+                  />
+                ))
+              : series.map((serie) => (
+                  <Card
+                    key={serie.id}
+                    imgSrc={`${config.posterImgBaseUrl}${serie.poster_path}`}
+                  />
+                ))}
           </div>
         </div>
       </div>

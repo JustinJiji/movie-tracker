@@ -1,10 +1,15 @@
 import React from "react";
-import './Other.css'
-function Card() {
+import "./Other.css";
+
+function Card({ imgSrc }) {
   return (
-    <div className="card">
-        <h2>Profile</h2>
-    </div>
-  )
+    <div
+      className="card"
+      style={{
+        backgroundImage: `url(${imgSrc})`,
+      }}
+    ></div>
+  );
 }
+
 export default Card;

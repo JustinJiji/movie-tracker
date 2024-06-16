@@ -17,6 +17,7 @@
   color: #d8e2ac;
   text-align: center;
   font-size: large;
+  width: 150px;
 }
 
 .card .text {
@@ -67,6 +68,23 @@
   color: #555;
 }
 
+/* search results */
+.search-results {
+  display: flex;
+  flex: 14;
+  list-style-type: none;
+  padding: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.no-result{
+  display: flex;
+  flex: 14;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Loader */
 .loading-icon {

@@ -150,3 +150,24 @@
 .home-cards-list::-webkit-scrollbar {
   display: none;
 }
+
+
+.search-overlay {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.searchbg-container {
+  justify-content: center;
+}
+.close-icon {
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

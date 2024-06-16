@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Card from "../../components/others/Card";
 import SearchBar from "../../components/others/SearchBar";
+import SearchResult from "../../components/others/SearchResult";
 import "./Home.css";
 import {
   getPopularMovies,
@@ -8,9 +9,11 @@ import {
   getTrendingBoth,
   getTrendingMovies,
   getTrendingSeries,
+  getSearchedItem,
 } from "../../api/Api";
 import config from "../../config";
 import Loader from "../../components/others/Loader";
+import { FaTimes } from "react-icons/fa"; // Import cross icon from react-icons/fa
 
 function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -21,6 +24,9 @@ function Home() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [activeButtonTrending, setActiveButtonTrending] = useState("Movie");
   const [activeButtonPopular, setActiveButtonPopular] = useState("Movie");
+  const [searchedResult, setSearchedResult] = useState([]);
+  const [error, setError] = useState(null);
+  const [searchBG, setSearchBG] = useState(false);
 
   const handleToggleTrending = (button) => {
     setActiveButtonTrending(button);
@@ -28,6 +34,22 @@ function Home() {
 
   const handleTogglePopular = (button) => {
     setActiveButtonPopular(button);
+  };
+
+  const handleSearch = async (query) => {
+    try {
+      const data = await getSearchedItem(query);
+      setSearchedResult(data);
+      setError(null);
+      setSearchBG(true); // Show search overlay
+    } catch (error) {
+      setError("Failed to fetch search results");
+      setSearchedResult([]);
+    }
+  };
+
+  const handleCloseSearch = () => {
+    setSearchBG(false); // Close search overlay
   };
 
   const nextSlide = useCallback(() => {
@@ -63,123 +85,136 @@ function Home() {
   }, [nextSlide]);
 
   if (msboth.length === 0) {
-    return <Loader />; // Loading 
+    return <Loader />; // Loading
   }
 
   const currentSlide = msboth[currentSlideIndex];
 
   return (
     <div className="home">
-      <div
-        className="header-image"
-        style={{
-          backgroundImage: `url(${config.backdropImgBaseUrl}${currentSlide.backdrop_path})`,
-        }}
-      >
-        <div className="header-home-overlay">
-          <div className="search-container">
-            <SearchBar />
+      {searchBG ? (
+        <div className="search-overlay">
+          <div className="search-container searchbg-container">
+            <SearchBar onSearch={handleSearch} />
+            <FaTimes className="close-icon" onClick={handleCloseSearch} />
+            {/* Close button */}
           </div>
-          <div className="header-texts">
-            <div className="header-title">
-              {currentSlide.title || currentSlide.name}
-            </div>
-            <div className="header-para">{currentSlide.overview}</div>
-          </div>
-          <div className="slide-indicators">
-            {msboth.map((slide, index) => (
-              <span
-                key={index}
-                className={index === currentSlideIndex ? "active" : ""}
-                onClick={() => setCurrentSlideIndex(index)}
-              ></span>
-            ))}
-          </div>
+          <SearchResult results={searchedResult} />
         </div>
-      </div>
+      ) : (
+        <>
+          <div
+            className="header-image"
+            style={{
+              backgroundImage: `url(${config.backdropImgBaseUrl}${currentSlide.backdrop_path})`,
+            }}
+          >
+            <div className="header-home-overlay">
+              <div className="search-container">
+                <SearchBar onSearch={handleSearch} />
+              </div>
 
-      <div className="home-content-container">
-        <div className="home-cards-container">
-          <div className="home-cards-title">
-            Trending
-            <div className="home-cards-toggle-container">
-              <div
-                className={`home-cards-toggle-button ${
-                  activeButtonTrending === "Movie" ? "active" : ""
-                }`}
-                onClick={() => handleToggleTrending("Movie")}
-              >
-                Movie
+              <div className="header-texts">
+                <div className="header-title">
+                  {currentSlide.title || currentSlide.name}
+                </div>
+                <div className="header-para">{currentSlide.overview}</div>
               </div>
-              <div
-                className={`home-cards-toggle-button ${
-                  activeButtonTrending === "Series" ? "active" : ""
-                }`}
-                onClick={() => handleToggleTrending("Series")}
-              >
-                Series
+              <div className="slide-indicators">
+                {msboth.map((slide, index) => (
+                  <span
+                    key={index}
+                    className={index === currentSlideIndex ? "active" : ""}
+                    onClick={() => setCurrentSlideIndex(index)}
+                  ></span>
+                ))}
               </div>
             </div>
           </div>
-          <div className="home-cards-list">
-            {activeButtonTrending === "Movie"
-              ? trendingMovies.map((trendingMovie) => (
-                  <Card
-                    key={trendingMovie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${trendingMovie.poster_path}`}
-                    title={trendingMovie.title || trendingMovie.name}
-                  />
-                ))
-              : trendingSeries.map((trendingSerie) => (
-                  <Card
-                    key={trendingSerie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${trendingSerie.poster_path}`}
-                    title={trendingSerie.title || trendingSerie.name}
-                  />
-                ))}
-          </div>
-        </div>
-        <div className="home-cards-container">
-          <div className="home-cards-title">
-            Popular
-            <div className="home-cards-toggle-container">
-              <div
-                className={`home-cards-toggle-button ${
-                  activeButtonPopular === "Movie" ? "active" : ""
-                }`}
-                onClick={() => handleTogglePopular("Movie")}
-              >
-                Movie
+          <div className="home-content-container">
+            <div className="home-cards-container">
+              <div className="home-cards-title">
+                Trending
+                <div className="home-cards-toggle-container">
+                  <div
+                    className={`home-cards-toggle-button ${
+                      activeButtonTrending === "Movie" ? "active" : ""
+                    }`}
+                    onClick={() => handleToggleTrending("Movie")}
+                  >
+                    Movie
+                  </div>
+                  <div
+                    className={`home-cards-toggle-button ${
+                      activeButtonTrending === "Series" ? "active" : ""
+                    }`}
+                    onClick={() => handleToggleTrending("Series")}
+                  >
+                    Series
+                  </div>
+                </div>
               </div>
-              <div
-                className={`home-cards-toggle-button ${
-                  activeButtonPopular === "Series" ? "active" : ""
-                }`}
-                onClick={() => handleTogglePopular("Series")}
-              >
-                Series
+              <div className="home-cards-list">
+                {activeButtonTrending === "Movie"
+                  ? trendingMovies.map((trendingMovie) => (
+                      <Card
+                        key={trendingMovie.id}
+                        imgSrc={`${config.posterImgBaseUrl}${trendingMovie.poster_path}`}
+                        title={trendingMovie.title || trendingMovie.name}
+                      />
+                    ))
+                  : trendingSeries.map((trendingSerie) => (
+                      <Card
+                        key={trendingSerie.id}
+                        imgSrc={`${config.posterImgBaseUrl}${trendingSerie.poster_path}`}
+                        title={trendingSerie.title || trendingSerie.name}
+                      />
+                    ))}
+              </div>
+            </div>
+            <div className="home-cards-container">
+              <div className="home-cards-title">
+                Popular
+                <div className="home-cards-toggle-container">
+                  <div
+                    className={`home-cards-toggle-button ${
+                      activeButtonPopular === "Movie" ? "active" : ""
+                    }`}
+                    onClick={() => handleTogglePopular("Movie")}
+                  >
+                    Movie
+                  </div>
+                  <div
+                    className={`home-cards-toggle-button ${
+                      activeButtonPopular === "Series" ? "active" : ""
+                    }`}
+                    onClick={() => handleTogglePopular("Series")}
+                  >
+                    Series
+                  </div>
+                </div>
+              </div>
+              <div className="home-cards-list">
+                {activeButtonPopular === "Movie"
+                  ? popularMovies.map((popularMovie) => (
+                      <Card
+                        key={popularMovie.id}
+                        imgSrc={`${config.posterImgBaseUrl}${popularMovie.poster_path}`}
+                        title={popularMovie.title || popularMovie.name}
+                      />
+                    ))
+                  : popularSeries.map((popularSerie) => (
+                      <Card
+                        key={popularSerie.id}
+                        imgSrc={`${config.posterImgBaseUrl}${popularSerie.poster_path}`}
+                        title={popularSerie.title || popularSerie.name}
+                      />
+                    ))}
               </div>
             </div>
           </div>
-          <div className="home-cards-list">
-            {activeButtonPopular === "Movie"
-              ? popularMovies.map((popularMovie) => (
-                  <Card
-                    key={popularMovie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${popularMovie.poster_path}`}
-                    title={popularMovie.title || popularMovie.name}
-                  />
-                ))
-              : popularSeries.map((popularSerie) => (
-                  <Card
-                    key={popularSerie.id}
-                    imgSrc={`${config.posterImgBaseUrl}${popularSerie.poster_path}`}
-                    title={popularSerie.title || popularSerie.name}
-                  />
-                ))}
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

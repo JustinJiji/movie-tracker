@@ -134,6 +134,12 @@
   color: var(--highlight-color);
 }
 
+
+
+.home-cards-list-container {
+  position: relative;
+}
+
 .home-cards-list {
   display: flex;
   overflow-x: auto;

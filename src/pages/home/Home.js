@@ -10,6 +10,7 @@ import {
   getTrendingSeries,
 } from "../../api/Api";
 import config from "../../config";
+import Loader from "../../components/others/Loader";
 
 function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -62,8 +63,7 @@ function Home() {
   }, [nextSlide]);
 
   if (msboth.length === 0) {
-    console.log("Loading state");
-    return <div>Loading...</div>; // Loading state
+    return <Loader />; // Loading 
   }
 
   const currentSlide = msboth[currentSlideIndex];

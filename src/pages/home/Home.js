@@ -13,7 +13,7 @@ import {
 } from "../../api/Api";
 import config from "../../config";
 import Loader from "../../components/others/Loader";
-import { FaTimes } from "react-icons/fa"; // Import cross icon from react-icons/fa
+import { FaTimes } from "react-icons/fa"; 
 
 function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -158,16 +158,12 @@ function Home() {
                 {activeButtonTrending === "Movie"
                   ? trendingMovies.map((trendingMovie) => (
                       <Card
-                        key={trendingMovie.id}
-                        imgSrc={`${config.posterImgBaseUrl}${trendingMovie.poster_path}`}
-                        title={trendingMovie.title || trendingMovie.name}
+                        obj={trendingMovie}
                       />
                     ))
                   : trendingSeries.map((trendingSerie) => (
                       <Card
-                        key={trendingSerie.id}
-                        imgSrc={`${config.posterImgBaseUrl}${trendingSerie.poster_path}`}
-                        title={trendingSerie.title || trendingSerie.name}
+                        obj={trendingSerie}
                       />
                     ))}
               </div>
@@ -198,17 +194,13 @@ function Home() {
                 {activeButtonPopular === "Movie"
                   ? popularMovies.map((popularMovie) => (
                       <Card
-                        key={popularMovie.id}
-                        imgSrc={`${config.posterImgBaseUrl}${popularMovie.poster_path}`}
-                        title={popularMovie.title || popularMovie.name}
+                        obj = {popularMovie}
                       />
                     ))
                   : popularSeries.map((popularSerie) => (
                       <Card
-                        key={popularSerie.id}
-                        imgSrc={`${config.posterImgBaseUrl}${popularSerie.poster_path}`}
-                        title={popularSerie.title || popularSerie.name}
-                      />
+                        obj={popularSerie}
+                        />
                     ))}
               </div>
             </div>

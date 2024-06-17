@@ -63,3 +63,15 @@ export const getSearchedItem = async (query) => {
     throw error;
   }
 };
+
+//view details
+
+export const getMultiDetails = async (media_type, id) => {
+  try {
+    const response = await axios.get(`/viewdetails/${media_type}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching multi details", error);
+    throw error;
+  }
+};

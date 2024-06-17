@@ -1,16 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Other.css";
+import config from "../../config";
 
-function Card({ imgSrc ,title}) {
+function Card({ obj }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/viewdetails/${obj.media_type}/${obj.id}`);
+  };
+
   return (
-    <div className="card">
+    <div className="card" onClick={handleClick}>
       <div
         className="card-image-container"
         style={{
-          backgroundImage: `url(${imgSrc})`,
+          backgroundImage: `url(${config.posterImgBaseUrl}${obj.poster_path})`,
         }}
       ></div>
-      <span className="text"> {title}</span>
+      <span className="text">{obj.title || obj.name}</span>
     </div>
   );
 }

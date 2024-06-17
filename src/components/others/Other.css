@@ -2,7 +2,7 @@
   position: relative;
   width: 100px;
   height: 150px;
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
   padding: 20px;
   margin: 10px;
   border-radius: 8px;
@@ -18,9 +18,11 @@
   text-align: center;
   font-size: large;
   width: 150px;
+  cursor: pointer;
 }
 
-.card .text {
+.text {
+  color: #d8e2ac;
   padding-left: 10px;
   padding-right: 10px;
   font-size: 14px;
@@ -28,12 +30,11 @@
 
 /*Search Bar*/
 
-
 .search-bar {
   display: flex;
   align-items: center;
   width: 300px;
-  background-color: rgba(255, 255, 255,0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   padding: 5px 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -41,9 +42,9 @@
 }
 
 .search-bar:hover {
-  width: 350px; 
+  width: 350px;
 }
-  
+
 .search-bar input[type="text"] {
   flex: 1;
   border: none;
@@ -78,7 +79,7 @@
   flex-wrap: wrap;
 }
 
-.no-result{
+.no-result {
   display: flex;
   flex: 14;
   color: white;

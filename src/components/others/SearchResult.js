@@ -12,6 +12,7 @@ const SearchResult = ({ results }) => {
       {results.map((item) => (
         <Card
           obj={item}
+          showMediaType={true}
         />
       ))}
     </div>

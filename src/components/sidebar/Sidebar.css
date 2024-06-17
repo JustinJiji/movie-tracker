@@ -77,12 +77,12 @@
 }
 
 .sidebar:hover .logo span:first-child {
-  color: #d75015;
+  color: goldenrod;
   opacity: 1;
 }
 
 .sidebar .logo span:last-child {
-  color: #d75015;
+  color: goldenrod;
   opacity: 1;
 }
 

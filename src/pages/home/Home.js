@@ -93,7 +93,7 @@ function Home() {
         <div className="search-overlay">
           <div className="search-container searchbg-container">
             <SearchBar onSearch={handleSearch} />
-            <FaTimes className="close-icon" onClick={handleCloseSearch} />
+            <FaTimes className="close-icon" onClick={handleCloseSearch} color="goldenrod"/>
             {/* Close button */}
           </div>
           <SearchResult results={searchedResult} />

@@ -7,6 +7,7 @@ function Landing() {
   const [showLogin, setShowLogin] = useState(false);
   const [activeTab, setActiveTab] = useState("login");
 
+
   const handleSignInClick = () => {
     setShowLogin(true);
   };
@@ -15,11 +16,14 @@ function Landing() {
     setActiveTab("register");
   };
 
+function reloadPage() {
+  window.location.reload();
+}
   return (
     <div>
       <div className={`bg-container ${showLogin ? "darken" : ""}`}>
         <div className={`navbar-container ${showLogin ? "centered" : ""}`}>
-          <div className="name">MovieTracker</div>
+          <div className="name" onClick={reloadPage}>MovieTracker</div>
           {!showLogin ? (
             <div className="button" onClick={handleSignInClick}>
               Sign In

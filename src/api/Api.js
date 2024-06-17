@@ -75,3 +75,15 @@ export const getMultiDetails = async (media_type, id) => {
     throw error;
   }
 };
+
+//upcoming
+
+export const getUpcomingMovies = async () => {
+  try {
+    const response = await axios.get("/movie/upcoming");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching multi details", error);
+    throw error;
+  }
+};

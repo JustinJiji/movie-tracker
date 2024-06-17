@@ -20,7 +20,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: green;
+  background-color: var(--highlight-color);
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -28,7 +28,7 @@
 }
 
 .btn:hover {
-  background-color: rgb(7, 145, 7);
+  background-color: rgba(25, 163, 138,0.9);
 }
 
 .registerline > h3 {
@@ -45,5 +45,5 @@
 
 .registerline > h3:nth-of-type(2):hover{
   cursor: pointer;
-  color: rgb(20, 147, 20);
+  color: rgba(25, 163, 138,0.9 );
 }

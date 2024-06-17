@@ -162,10 +162,11 @@
 
 .searchbg-container {
   justify-content: center;
+  padding-top: 20px;
 }
 .close-icon {
   cursor: pointer;
-  color: white;
+  padding: 20px;
   font-size: 1.5rem;
   position: absolute;  
   right: 10px;

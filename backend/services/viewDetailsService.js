@@ -22,23 +22,24 @@ const fetchDetailsForType = async (media_type, id) => {
 };
 
 const fetchMultiDetails = async (media_type, id) => {
-  if (media_type!='undefined') {
+  if (media_type !== undefined && media_type !== "undefined") {
     const data = await fetchDetailsForType(media_type, id);
     if (data) {
       return data;
+    } else {
+      throw new Error(`Failed to fetch details for ${media_type}`);
     }
-    throw new Error(`Failed to fetch details for ${media_type}`);
   } else {
     const movieData = await fetchDetailsForType("movie", id);
-    if (movieData) {
-      return movieData;
-    }
     const tvData = await fetchDetailsForType("tv", id);
-    if (tvData) {
-      return tvData;
+
+    if (movieData && tvData) {
+      return [tvData, movieData];
     }
-    throw new Error("Failed to fetch details for both movie and tv");
+
+    return movieData || tvData;
   }
 };
+
 
 module.exports = { fetchMultiDetails };

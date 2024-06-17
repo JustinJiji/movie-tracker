@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import "./ViewDetails.css";
-import "../home/Home.css";
 import config from "../../config";
 import Loader from "../../components/others/Loader";
 import { getMultiDetails } from "../../api/Api";
 
 function ViewDetails() {
   const { media_type, id } = useParams();
+  const location = useLocation();
+  const { name } = location.state || {}; 
   const [obj, setObj] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +16,15 @@ function ViewDetails() {
     const fetchDetails = async () => {
       try {
         const data = await getMultiDetails(media_type, id);
-        setObj(data);
+        if (Array.isArray(data)) {
+          if (data[0].name === name || data[0].title === name) {
+            setObj(data[0]);
+          } else {
+            setObj(data[1]);
+          }
+        } else {
+          setObj(data);
+        }
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -23,7 +32,7 @@ function ViewDetails() {
     };
 
     fetchDetails();
-  }, [media_type, id]);
+  }, [media_type, name, id]);
 
   if (loading) return <Loader />;
 
@@ -34,7 +43,7 @@ function ViewDetails() {
         backgroundImage: `url(${config.backdropImgBaseUrl}${obj.backdrop_path})`,
       }}
     >
-      <div className="header-home-overlay">
+      <div className="header-home-overlay text-side-overlay">
         <div className="header-texts">
           <div className="header-title">{obj.title || obj.name}</div>
           <div className="header-para">{obj.overview}</div>

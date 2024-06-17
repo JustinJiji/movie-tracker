@@ -18,9 +18,8 @@ const fetchSearchedItem = async (query) => {
   };
   try {
     const response = await axios.request(options);
-    // Filter out results with media_type: "person" and check for original_language
     const filteredResults = response.data.results.filter(
-      (item) => item.media_type !== "person" && item.original_language === "en"
+      (item) => item.media_type !== "person" && item.poster_path !== null
     );
     // Sort results by popularity
     const sortedResults = filteredResults.sort(

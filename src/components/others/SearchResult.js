@@ -1,7 +1,6 @@
 import React from "react";
 import "./Other.css";
 import Card from "./Card";
-import config from "../../config";
 
 const SearchResult = ({ results }) => {
   if (results.length === 0) {
@@ -12,8 +11,7 @@ const SearchResult = ({ results }) => {
     <div className="search-results">
       {results.map((item) => (
         <Card
-          imgSrc={`${config.posterImgBaseUrl}${item.poster_path}`}
-          title={item.name || item.title}
+          obj={item}
         />
       ))}
     </div>

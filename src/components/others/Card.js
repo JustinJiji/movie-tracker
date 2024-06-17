@@ -7,7 +7,9 @@ function Card({ obj }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/viewdetails/${obj.media_type}/${obj.id}`);
+    navigate(`/viewdetails/${obj.media_type}/${obj.id}`,{
+      state: {name: obj.name || obj.title}
+    });
   };
 
   return (

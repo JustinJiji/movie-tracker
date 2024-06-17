@@ -25,7 +25,6 @@ function Home() {
   const [activeButtonTrending, setActiveButtonTrending] = useState("Movie");
   const [activeButtonPopular, setActiveButtonPopular] = useState("Movie");
   const [searchedResult, setSearchedResult] = useState([]);
-  const [error, setError] = useState(null);
   const [searchBG, setSearchBG] = useState(false);
 
   const handleToggleTrending = (button) => {
@@ -40,10 +39,8 @@ function Home() {
     try {
       const data = await getSearchedItem(query);
       setSearchedResult(data);
-      setError(null);
-      setSearchBG(true); // Show search overlay
+      setSearchBG(true); 
     } catch (error) {
-      setError("Failed to fetch search results");
       setSearchedResult([]);
     }
   };

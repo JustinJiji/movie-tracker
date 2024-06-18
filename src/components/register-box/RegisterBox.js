@@ -17,7 +17,7 @@ function RegisterBox() {
     }
     // Handle registration logic here
     // After successful registration, navigate to the home page
-    navigate("/home");
+    navigate("/main");
   };
 
   return (

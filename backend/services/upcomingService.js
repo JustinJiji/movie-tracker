@@ -1,15 +1,16 @@
 const axios = require("axios");
+const { TMDB_API_KEY, TMDB_BASE_URL } = require("../config/tmdb");
+
 
 const fetchUpcomingMovies = async () => {
   try {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/upcoming",
+      url: `${TMDB_BASE_URL}/movie/upcoming`,
       params: { language: "en-US", page: "1" },
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTAzYzhiZjg3MWZhZmI4NzUyMjU0M2ZkZDYwOGFhMCIsInN1YiI6IjY2NmQ1OWYyNmIzYTk0MmQyOGVjMWNkMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.AL1uq41P9vVLttjPOswfDZg-TRmeamVc-M4bggKILwM",
+        Authorization: `Bearer ${TMDB_API_KEY}`,
       },
     };
 

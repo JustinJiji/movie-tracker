@@ -13,6 +13,10 @@
   border-color: #5b9dd9;
   box-shadow: 0 0 5px rgba(91, 157, 217, 0.5);
 }
+.error {
+  color: red;
+  margin-top: 10px;
+}
 
 .btn {
   width: 100%;

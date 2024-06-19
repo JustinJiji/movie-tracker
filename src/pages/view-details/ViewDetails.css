@@ -6,6 +6,14 @@
   );
 }
 
+.success-message {
+  color: green;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+
 .backbutton {
   padding-left: 30px;
   color: goldenrod;
@@ -96,12 +104,19 @@
   display: flex;
   justify-content: space-evenly;
   align-items: end;
-  width: 350px;
+  width: 420px;
   height: 50px;
   position: absolute;
   right: 30px;
   bottom: 70px;
   color: white;
+}
+
+.adding-button.inactive {
+  background-color: #ccc;
+  color: #666;
+  opacity: 0.7;
+  pointer-events: none; /* Disable pointer events for inactive buttons */
 }
 
 .adding-button {

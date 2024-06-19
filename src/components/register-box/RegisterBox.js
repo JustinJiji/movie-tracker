@@ -1,27 +1,38 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signUp } from "../../firebase/Auth";
 import "./RegisterBox.css";
 
-function RegisterBox() {
+function RegisterBox({ setLoading, handleError }) {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true); 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      handleError("Passwords do not match");
+      setLoading(false); 
       return;
     }
-    // Handle registration logic here
-    // After successful registration, navigate to the home page
-    navigate("/main");
+
+    try {
+      const user = await signUp(username, password, name);
+      console.log("User registered:", user);
+      navigate("/main");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      handleError(error.message); 
+    } finally {
+      setLoading(false); 
+    }
   };
 
   return (
-    <>
+    <div className="register-container">
       <form onSubmit={handleRegister}>
         <input
           className="textbox"
@@ -31,7 +42,6 @@ function RegisterBox() {
           onChange={(e) => setName(e.target.value)}
           required
         />
-
         <input
           className="textbox"
           type="text"
@@ -40,7 +50,6 @@ function RegisterBox() {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-
         <input
           className="textbox"
           type="password"
@@ -49,7 +58,6 @@ function RegisterBox() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
         <input
           className="textbox"
           type="password"
@@ -58,14 +66,12 @@ function RegisterBox() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-
         <button className="btn" type="submit">
           Register
         </button>
       </form>
-    </>
+    </div>
   );
 }
-
 
 export default RegisterBox;

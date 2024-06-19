@@ -14,7 +14,8 @@ import {
   addToWatched,
   removeFromWatchlist,
   removeFromWatched,
-  getUserMediaLists,
+  getUserWatchedLists,
+  getUserWatchlists,
 } from "../../firebase/FirestoreUtils";
 
 function ViewDetails() {
@@ -46,14 +47,15 @@ function ViewDetails() {
         } else {
           setObj(data);
         }
-        const userMediaLists = await getUserMediaLists(); // Fetch the user's lists
+        const userWatchedList = await getUserWatchedLists(); 
+        const userWatchlist = await getUserWatchlists()
         setInWatchlist(
-          userMediaLists.watchlist.some(
+          userWatchlist.some(
             (item) => item.id === id && item.name === name
           )
         );
         setInWatched(
-          userMediaLists.watched.some(
+          userWatchedList.some(
             (item) => item.id === id && item.name === name
           )
         );

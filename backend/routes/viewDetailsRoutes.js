@@ -3,6 +3,6 @@ const { getMultiDetails } = require("../controllers/viewDetailsController");
 
 const router = express.Router();
 
-router.get("/:media_type/:id", getMultiDetails); 
+router.get("/:media_type/:id", getMultiDetails);
 
 module.exports = router;

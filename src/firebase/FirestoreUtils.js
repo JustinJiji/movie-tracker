@@ -69,13 +69,48 @@ export const removeFromWatched = async (name, id) => {
 };
 
 
-export const getUserMediaLists = async () => {
+
+export const getUserWatchedLists = async () => {
   const user = auth.currentUser;
   if (user) {
-    const userRef = doc(db, "users", user.uid);
-    const userDoc = await getDoc(userRef);
-    return userDoc.exists() ? userDoc.data() : { watchlist: [], watched: [] };
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userRef);
+
+      if (userDoc.exists()) {
+        return userDoc.data().watched || []; // Return watched array or empty array if not present
+      } else {
+        console.warn("User document does not exist.");
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching user document:", error);
+      throw error;
+    }
   } else {
     throw new Error("User not authenticated");
   }
 };
+
+export const getUserWatchlists = async () => {
+  const user = auth.currentUser;
+  if (user) {
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userRef);
+
+      if (userDoc.exists()) {
+        return userDoc.data().watchlist || []; // Return watchlist array or empty array if not present
+      } else {
+        console.warn("User document does not exist.");
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching user document:", error);
+      throw error;
+    }
+  } else {
+    throw new Error("User not authenticated");
+  }
+};
+

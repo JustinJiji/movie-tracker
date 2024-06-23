@@ -68,8 +68,6 @@ export const removeFromWatched = async (name, id) => {
   }
 };
 
-
-
 export const getUserWatchedLists = async () => {
   const user = auth.currentUser;
   if (user) {
@@ -113,4 +111,3 @@ export const getUserWatchlists = async () => {
     throw new Error("User not authenticated");
   }
 };
-

@@ -1,3 +1,4 @@
+// src/components/LoginBox.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../../firebase/Auth";
@@ -10,17 +11,19 @@ function LoginBox({ onRegisterClick, setLoading, handleError }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when login process starts
+    setLoading(true);
     try {
-      const { user, data } = await signIn(username, password);
-      console.log("user name:", user);
-      console.log("User data:", data);
-      navigate("/main");
+      const { user, data, isAdmin } = await signIn(username, password);
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/main");
+      }
     } catch (error) {
       console.error("Login failed:", error);
-      handleError(error.message); // Handle error and set error message
+      handleError(error.message);
     } finally {
-      setLoading(false); // Set loading to false when login process completes
+      setLoading(false);
     }
   };
 

@@ -39,14 +39,11 @@ export const signIn = async (email, password) => {
       password
     );
     const user = userCredential.user;
-
+    const idTokenResult = await user.getIdTokenResult();
+    const isAdmin = idTokenResult.claims.isAdmin;
     // Fetch additional user data from Firestore
     const userDoc = await getDoc(doc(db, "users", user.uid));
-    if (userDoc.exists()) {
-      return { user, data: userDoc.data() };
-    } else {
-      throw new Error("No such user data!");
-    }
+    return { user, data: userDoc.data(), isAdmin };
   } catch (error) {
     console.error("Error signing in:", error);
     throw error;

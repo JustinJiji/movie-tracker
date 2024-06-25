@@ -14,7 +14,6 @@ function Watched() {
       try {
         const watchedList = await getUserWatchedLists();
 
-        // Ensure watchedList is an array
         if (!Array.isArray(watchedList)) {
           console.error("Watched list is not an array:", watchedList);
           return;
